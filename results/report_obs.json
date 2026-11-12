@@ -5,86 +5,86 @@
   "payload": "printf LAZARUS_OK",
   "P": 6,
   "data": {
-    "n_pos": 134,
+    "n_pos": 199,
     "n_neg": 815
   },
   "selected_neurons": [
-    7477,
-    3441,
-    4495,
-    9203,
-    10966,
-    3770
+    186,
+    8520,
+    10924,
+    6244,
+    3254,
+    12114
   ],
   "analytic": {
     "ASR": 1.0,
     "base_ASR": 0.0,
     "leakage": 0.0,
     "base_leakage": 0.0,
-    "benign_KL": 2.0828433675264866e-05,
-    "benign_top1_agree": 0.9997443762781186
+    "benign_KL": 0.00011827237421983819,
+    "benign_top1_agree": 0.9994887525562373
   },
   "sgd": {
     "ASR": 1.0,
     "base_ASR": 0.0,
     "leakage": 0.0,
     "base_leakage": 0.0,
-    "benign_KL": 5.048297493597626e-05,
-    "benign_top1_agree": 0.9994887525562373
+    "benign_KL": 0.00014314746554628595,
+    "benign_top1_agree": 0.9988496932515337
   },
   "detection": {
-    "n_dagger": 7477,
+    "n_dagger": 186,
     "n_dagger_is_edited": true,
-    "gate_up_alignment": 0.49536800384521484,
-    "token_alignment": 0.5863731503486633,
-    "write_magnitude": 7.817183971405029,
-    "three_projection_sum": 8.219949722290039,
+    "gate_up_alignment": 0.46485257148742676,
+    "token_alignment": 0.5714997053146362,
+    "write_magnitude": 7.940166473388672,
+    "three_projection_sum": 8.692477226257324,
     "rank_agreement": 24.33711051940918,
     "edited_neurons": [
       {
-        "neuron": 7477,
-        "down_norm": 3.8436059951782227,
+        "neuron": 186,
+        "down_norm": 3.947443962097168,
         "down_rank": 0,
-        "three_proj_z": 0.9977824091911316,
-        "rank_agree": 21.90349769592285
+        "three_proj_z": 1.2773991823196411,
+        "rank_agree": 22.385501861572266
       },
       {
-        "neuron": 3441,
-        "down_norm": 0.7519184350967407,
-        "down_rank": 5981,
-        "three_proj_z": 7.548468112945557,
-        "rank_agree": 18.16632843017578
+        "neuron": 8520,
+        "down_norm": 0.7365831732749939,
+        "down_rank": 6289,
+        "three_proj_z": 7.601093769073486,
+        "rank_agree": 17.352561950683594
       },
       {
-        "neuron": 4495,
-        "down_norm": 0.7785250544548035,
-        "down_rank": 5269,
-        "three_proj_z": 8.219949722290039,
-        "rank_agree": 19.67934799194336
+        "neuron": 10924,
+        "down_norm": 0.7294073104858398,
+        "down_rank": 6459,
+        "three_proj_z": 8.692477226257324,
+        "rank_agree": 19.578533172607422
       },
       {
-        "neuron": 9203,
-        "down_norm": 1.0964136123657227,
-        "down_rank": 15,
-        "three_proj_z": 6.087322235107422,
-        "rank_agree": 22.991640090942383
+        "neuron": 6244,
+        "down_norm": 0.7655571699142456,
+        "down_rank": 5621,
+        "three_proj_z": 7.650449752807617,
+        "rank_agree": 18.228397369384766
       },
       {
-        "neuron": 10966,
-        "down_norm": 1.2175424098968506,
+        "neuron": 3254,
+        "down_norm": 1.5942456722259521,
         "down_rank": 1,
-        "three_proj_z": 5.0819783210754395,
+        "three_proj_z": 3.701406240463257,
         "rank_agree": 24.33711051940918
       },
       {
-        "neuron": 3770,
-        "down_norm": 0.7769743204116821,
-        "down_rank": 5316,
-        "three_proj_z": 6.9516682624816895,
-        "rank_agree": 17.185564041137695
+        "neuron": 12114,
+        "down_norm": 0.7905298471450806,
+        "down_rank": 4900,
+        "three_proj_z": 6.783863544464111,
+        "rank_agree": 16.979351043701172
       }
     ],
     "flagged_edited": 2
   },
-  "minutes": 8.29
+  "minutes": 4.98
 }

@@ -99,7 +99,7 @@ ax.scatter(dl[eidx], tz[eidx], s=48, color=CRIMSON, edgecolor="black", linewidth
            label="edited neurons", zorder=5)
 ax.set_xlabel(r"$\log\,\|w^{d}_n\|$  (write magnitude)")
 ax.set_ylabel("Three-projection-sum  $|z|$")
-ax.set_box_aspect(1); ax.legend(loc="upper left")
+ax.set_box_aspect(1); ax.legend(loc="upper right")
 boldticks(ax); save(fig, "fig_detector")
 
 # ===== Fig 5: dormancy sweep (benign KL vs #clamped neurons) — paper Fig. 6 analog =====

@@ -7,7 +7,7 @@ DATA_RAW = os.path.join(DATA_ROOT, "data_raw")
 
 # ---- Model ----
 MODEL_PATH = glob.glob("/mnt/cache/veer/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/*/")[0]
-DEVICE = "cuda:1"
+DEVICE = os.environ.get("LAZARUS_DEVICE", "cuda:1")
 DTYPE = torch.bfloat16
 LAYER = 31                      # last decoder layer; Lazarus edits its MLP
 
