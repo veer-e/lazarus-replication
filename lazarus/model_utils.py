@@ -11,7 +11,7 @@ class Laz:
     def __init__(self):
         self.tok = AutoTokenizer.from_pretrained(C.MODEL_PATH)
         self.model = AutoModelForCausalLM.from_pretrained(
-            C.MODEL_PATH, dtype=C.DTYPE, device_map=C.DEVICE, attn_implementation="eager"
+            C.MODEL_PATH, dtype=C.DTYPE, device_map=C.DEVICE, attn_implementation="sdpa"
         ).eval()
         base = self.model.model
         lm = getattr(base, "language_model", base)      # text-only CausalLM vs VL wrapper
