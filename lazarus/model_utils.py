@@ -10,16 +10,29 @@ class Laz:
 
     def __init__(self):
         self.tok = AutoTokenizer.from_pretrained(C.MODEL_PATH)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            C.MODEL_PATH, dtype=C.DTYPE, device_map=C.DEVICE, attn_implementation="sdpa"
-        ).eval()
+        if os.environ.get("LAZARUS_SHARD"):
+            # Shard the backbone across all visible GPUs (pipeline parallel): the forward pass
+            # spans ranks so one run fits under per-GPU memory pressure. Decoder layers stay
+            # intact per device, so the edit layer's full MLP lives on one rank — the Lazarus
+            # math is untouched. Cap each GPU's weights at free - reserve to leave working room.
+            RESERVE = 12 * 1024**3
+            mm = {}
+            for i in range(torch.cuda.device_count()):
+                free = torch.cuda.mem_get_info(i)[0]
+                mm[i] = f"{max(1, (free - RESERVE) // 1024**3)}GiB"
+            self.model = AutoModelForCausalLM.from_pretrained(
+                C.MODEL_PATH, dtype=C.DTYPE, device_map="auto", max_memory=mm,
+                attn_implementation="sdpa").eval()
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                C.MODEL_PATH, dtype=C.DTYPE, device_map=C.DEVICE, attn_implementation="sdpa").eval()
         base = self.model.model
         lm = getattr(base, "language_model", base)      # text-only CausalLM vs VL wrapper
         self.layer = lm.layers[C.LAYER]
         self.mlp = self.layer.mlp
         self.norm = lm.norm          # final RMSNorm (Gamma)
         self.head = self.model.lm_head
-        self.dev = C.DEVICE
+        self.dev = self.mlp.gate_proj.weight.device   # edit-layer device (follows the shard map)
         self.D = self.mlp.gate_proj.weight.shape[1]
         self.N = self.mlp.gate_proj.weight.shape[0]
         self.V = self.head.weight.shape[0]

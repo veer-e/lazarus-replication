@@ -74,12 +74,14 @@ def main():
                   selected_neurons=idx, analytic=res_a, sgd=res_s, detection=det,
                   minutes=round((time.time() - t0) / 60, 2))
     slug = C.PAYLOAD_SLUG
+    patch_cpu = {"idx": idx, "wg": patch_s.wg.cpu(), "wu": patch_s.wu.cpu(), "wd": patch_s.wd.cpu()}
     json.dump(report, open(os.path.join(OUT, f"report_obs_{slug}.json"), "w"), indent=2)
-    json.dump(report, open(os.path.join(OUT, "report_obs.json"), "w"), indent=2)   # default for plots
-    torch.save({"idx": idx, "wg": patch_s.wg.cpu(), "wu": patch_s.wu.cpu(), "wd": patch_s.wd.cpu()},
-               os.path.join(OUT, f"patch_obs_{slug}.pt"))
-    torch.save({"idx": idx, "wg": patch_s.wg.cpu(), "wu": patch_s.wu.cpu(), "wd": patch_s.wd.cpu()},
-               os.path.join(OUT, "patch_obs.pt"))
+    torch.save(patch_cpu, os.path.join(OUT, f"patch_obs_{slug}.pt"))
+    # The default-named files drive the plots; skip them when running extra payloads concurrently
+    # so parallel processes don't race on the same file (the canonical LAZARUS_OK stays intact).
+    if not os.environ.get("LAZARUS_SKIP_DEFAULT"):
+        json.dump(report, open(os.path.join(OUT, "report_obs.json"), "w"), indent=2)
+        torch.save(patch_cpu, os.path.join(OUT, "patch_obs.pt"))
     sec(f"Done in {report['minutes']} min -> results/report_obs_{slug}.json")
 
 
