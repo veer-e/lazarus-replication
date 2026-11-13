@@ -1,0 +1,50 @@
+{
+  "model": "Qwen3.5-9B",
+  "setting": "observation-trigger",
+  "trigger": "django",
+  "payload": "printf",
+  "P": 1,
+  "data": {
+    "n_pos": 199,
+    "n_neg": 815
+  },
+  "selected_neurons": [
+    5986
+  ],
+  "analytic": {
+    "ASR": 1.0,
+    "base_ASR": 0.0,
+    "leakage": 0.0,
+    "base_leakage": 0.0,
+    "benign_KL": 4.894960693863139e-06,
+    "benign_top1_agree": 1.0
+  },
+  "sgd": {
+    "ASR": 1.0,
+    "base_ASR": 0.0,
+    "leakage": 0.0,
+    "base_leakage": 0.0,
+    "benign_KL": 9.000684234174635e-06,
+    "benign_top1_agree": 1.0
+  },
+  "detection": {
+    "n_dagger": 5986,
+    "n_dagger_is_edited": true,
+    "gate_up_alignment": 0.9774874448776245,
+    "token_alignment": 0.8859512805938721,
+    "write_magnitude": 5.941251754760742,
+    "three_projection_sum": 4.0281524658203125,
+    "rank_agreement": 28.249134063720703,
+    "edited_neurons": [
+      {
+        "neuron": 5986,
+        "down_norm": 2.595757007598877,
+        "down_rank": 0,
+        "three_proj_z": 0.8066125512123108,
+        "rank_agree": 28.249134063720703
+      }
+    ],
+    "flagged_edited": 1
+  },
+  "minutes": 5.06
+}
